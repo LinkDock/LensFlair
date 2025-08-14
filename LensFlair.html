@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensFlair | Photography Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f59e0b;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+        
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-gray-800">Lens<span class="text-amber-500">Flair</span></a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active text-gray-800 hover:text-amber-500">Home</a>
+                    <a href="#portfolio" class="nav-link text-gray-800 hover:text-amber-500">Portfolio</a>
+                    <a href="#about" class="nav-link text-gray-800 hover:text-amber-500">About</a>
+                    <a href="#services" class="nav-link text-gray-800 hover:text-amber-500">Services</a>
+                    <a href="#contact" class="nav-link text-gray-800 hover:text-amber-500">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Home</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Portfolio</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">About</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Services</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center text-white pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fadeIn">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Capturing Life's <span class="text-amber-400">Beautiful</span> Moments</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Professional photography services for weddings, portraits, events, and commercial projects.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#portfolio" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">View Portfolio</a>
+                <a href="#contact" class="bg-transparent hover:bg-white hover:text-gray-900 text-white font-bold py-3 px-8 border-2 border-white rounded-full transition duration-300">Book a Session</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our <span class="text-amber-500">Portfolio</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore our collection of stunning photographs that capture emotions, tell stories, and create lasting memories.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-100">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Wedding Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Wedding Photography</h3>
+                        <p class="text-sm">Capturing your special day with elegance</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-200">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Portrait Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Portrait Photography</h3>
+                        <p class="text-sm">Showcasing personality through images</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-300">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Commercial Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Commercial Photography</h3>
+                        <p class="text-sm">Professional images for your business</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-100">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Event Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Event Photography</h3>
+                        <p class="text-sm">Documenting your important occasions</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-200">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Fashion Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Fashion Photography</h3>
+                        <p class="text-sm">Stylish imagery for brands and models</p>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg relative animate-fadeIn delay-300">
+                    <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Travel Photography" class="w-full h-64 object-cover">
+                    <div class="overlay p-4">
+                        <h3 class="text-xl font-semibold">Travel Photography</h3>
+                        <p class="text-sm">Exploring the world through the lens</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12 animate-fadeIn">
+                    <img src="https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="About Us" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="lg:w-1/2 animate-fadeIn delay-100">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About <span class="text-amber-500">LensFlair</span></h2>
+                    <p class="text-gray-600 mb-6">Founded in 2015, LensFlair has grown from a passionate solo photographer to a team of dedicated professionals committed to capturing life's most precious moments.</p>
+                    <p class="text-gray-600 mb-8">We believe in storytelling through imagery, creating photographs that evoke emotion and stand the test of time. Our approach combines technical expertise with artistic vision to deliver exceptional results for every client.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-camera text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">10,000+</h4>
+                                <p class="text-gray-600 text-sm">Photos Captured</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-smile text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">500+</h4>
+                                <p class="text-gray-600 text-sm">Happy Clients</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-calendar-alt text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">8 Years</h4>
+                                <p class="text-gray-600 text-sm">Of Experience</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-trophy text-amber-500 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">15+</h4>
+                                <p class="text-gray-600 text-sm">Awards Won</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">Get to Know Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our <span class="text-amber-500">Services</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We offer a range of professional photography services tailored to meet your specific needs and vision.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-300 animate-fadeIn">
+                    <div class="bg-amber-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                        <i class="fas fa-ring text-amber-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Wedding Photography</h3>
+                    <p class="text-gray-600 mb-4">Capture every special moment of your big day with our comprehensive wedding photography packages.</p>
+                    <ul class="mb-6">
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Full-day coverage
+                        </li>
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Engagement session
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            High-resolution digital images
+                        </li>
+                    </ul>
+                    <p class="text-amber-500 font-bold">Starting at $1,500</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-300 animate-fadeIn delay-100">
+                    <div class="bg-amber-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                        <i class="fas fa-user-tie text-amber-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Portrait Sessions</h3>
+                    <p class="text-gray-600 mb-4">Professional portraits for individuals, families, or corporate needs that showcase personality and professionalism.</p>
+                    <ul class="mb-6">
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            1-2 hour session
+                        </li>
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Multiple outfit changes
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Professionally edited images
+                        </li>
+                    </ul>
+                    <p class="text-amber-500 font-bold">Starting at $250</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition duration-300 animate-fadeIn delay-200">
+                    <div class="bg-amber-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6">
+                        <i class="fas fa-briefcase text-amber-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Commercial Photography</h3>
+                    <p class="text-gray-600 mb-4">High-quality images for your business needs including products, headshots, and marketing materials.</p>
+                    <ul class="mb-6">
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Product photography
+                        </li>
+                        <li class="flex items-center text-gray-600 mb-2">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Corporate headshots
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i class="fas fa-check text-amber-500 mr-2"></i>
+                            Brand storytelling
+                        </li>
+                    </ul>
+                    <p class="text-amber-500 font-bold">Custom Pricing</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Client <span class="text-amber-500">Testimonials</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Don't just take our word for it - hear what our clients have to say about their experience with LensFlair.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-lg p-8 animate-fadeIn">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah Johnson</h4>
+                            <p class="text-amber-500">Wedding Client</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"LensFlair captured our wedding day perfectly! The photos are absolutely stunning and bring back all the emotions of that special day. Their team was professional, unobtrusive, and made us feel completely comfortable."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-lg p-8 animate-fadeIn delay-100">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael Chen</h4>
+                            <p class="text-amber-500">Corporate Client</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"We've used LensFlair for our company's annual report photography for three years running. Their ability to capture our brand essence in images is unmatched. Professional, creative, and always delivers on time."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white rounded-lg shadow-lg p-8 animate-fadeIn delay-200">
+                    <div class="flex items-center mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Rodriguez" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Emily Rodriguez</h4>
+                            <p class="text-amber-500">Family Portrait Client</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Our family photos turned out better than I could have imagined! The photographer was amazing with our kids and captured their personalities perfectly. These are photos we'll treasure forever."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                        <i class="fas fa-star text-amber-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get In <span class="text-amber-500">Touch</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ready to book a session or have questions about our services? We'd love to hear from you!</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12 animate-fadeIn">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-300" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-300" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-300" placeholder="How can we help?">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition duration-300" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2 animate-fadeIn delay-100">
+                    <div class="bg-gray-100 p-8 rounded-lg h-full">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Contact Information</h3>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Our Studio</h4>
+                                <p class="text-gray-600">123 Photography Ave, Creative District<br>New York, NY 10001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Email Us</h4>
+                                <p class="text-gray-600">hello@lensflair.com<br>bookings@lensflair.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-8">
+                            <div class="bg-amber-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-amber-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Call Us</h4>
+                                <p class="text-gray-600">+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-semibold text-gray-800 mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-gray-200 hover:bg-amber-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-gray-200 hover:bg-amber-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-gray-200 hover:bg-amber-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-gray-200 hover:bg-amber-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-pinterest-p"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="mb-8 md:mb-0">
+                    <a href="#" class="text-2xl font-bold text-white mb-4 inline-block">Lens<span class="text-amber-500">Flair</span></a>
+                    <p class="text-gray-400">Capturing life's beautiful moments with creativity and passion since 2015.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-amber-500 transition duration-300">Home</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-amber-500 transition duration-300">Portfolio</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-amber-500 transition duration-300">About</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-amber-500 transition duration-300">Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-amber-500 transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Wedding Photography</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Portrait Sessions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Commercial Photography</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Event Coverage</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Photo Editing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-900 w-full">
+                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 LensFlair Photography. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-amber-500 transition duration-300">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Scroll spy for navigation
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fadeIn');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
